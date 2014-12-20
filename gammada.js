@@ -50,7 +50,6 @@ $(document).ready(function() {
             uid: authData.token,
             pid: partner.uid
           };
-          console.log(partner.uid);
           userRef.set({
             uid: authData.token,
             status: 'chatting',
