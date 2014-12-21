@@ -79,9 +79,43 @@ $(document).ready(function () {
           });
         };
       });
+<<<<<<< HEAD
       userRef.on('value', function (snap) {
         yourStatus = snap.val().status;
         yourPartner = snap.val().chattingWith;
+=======
+      userRef.parent().orderByChild("status").on("child_added", function poller(snapshot) {
+        if (snapshot.val().status === "polling" && snapshot.val().uid !== authData.token) {
+          partner = snapshot.val();
+          data = {
+            uid: authData.token,
+            pid: partner.uid
+          };
+          userRef.set({
+            uid: authData.token,
+            status: 'chatting',
+            chattingWith: partner.uid
+          });
+          $('#looking').replaceWith('<li>You\'re now chatting with a stranger!');
+          $('input').prop("disabled", false)
+          userRef.off();
+        };
+        if (snapshot.val().chattingWith === authData.token) {
+          partner = snapshot.val();
+          data = {
+            uid: authData.token,
+            pid: partner.uid
+          };
+          userRef.set({
+            uid: authData.token,
+            status: 'chatting',
+            chattingWith: partner.uid
+          });
+          $('#looking').replaceWith('<li>You\'re now chatting with a stranger!');
+          $('input').prop("disabled", false)
+          userRef.off();
+        };
+>>>>>>> origin/master
       });
       userRef.set({
         uid: yourUid,
