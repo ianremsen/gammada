@@ -1,4 +1,4 @@
-gammada v0.1
+gammada v0.2
 =======
 *A randomizing chat client that makes it suck to be a spammer or an idiot.*
 
