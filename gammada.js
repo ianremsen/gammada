@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var authRef = new Firebase('https://gammada.firebaseio.com/auth/');
+  var authRef = new Firebase('https://yourfirebase.firebaseio.com/auth/');
   $("#startbutton").hover(function () {
     $("#startbutton").toggleClass("buttonhover", 100);
     $("#startbutton").css('cursor', 'pointer');
@@ -59,9 +59,9 @@ $(document).ready(function () {
           };
         });
       };
-      userRef = new Firebase('https://gammada.firebaseio.com/users/' + authData.uid);
-      amOnline = new Firebase('https://gammada.firebaseio.com/.info/connected');
-      mesgRef = new Firebase('https://gammada.firebaseio.com/mesg/');
+      userRef = new Firebase('https://yourfirebase.firebaseio.com/users/' + authData.uid);
+      amOnline = new Firebase('https://yourfirebase.firebaseio.com/.info/connected');
+      mesgRef = new Firebase('https://yourfirebase.firebaseio.com/mesg/');
       if (!error) {
         console.log("Authenticated successfully with payload:", authData);
       };
