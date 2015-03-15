@@ -1,4 +1,4 @@
-gammada v0.3
+gammada v0.4
 =======
 *A randomizing chat client*
 
