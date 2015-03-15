@@ -1,6 +1,6 @@
-// Gammada v0.2
+// Gammada v0.4
 $(document).ready(function () {
-  var authRef = new Firebase('https://yourfirebase.firebaseio.com/auth/');
+  var authRef = new Firebase('https://gammada.firebaseio.com/auth/');
   $("#startbutton").hover(function () {
     $(this).toggleClass("buttonhover", 100);
     $(this).css('cursor', 'pointer');
@@ -21,8 +21,8 @@ $(document).ready(function () {
         $('#DCbtn').addClass('newChat');
         $('#DCbtn').removeClass('nextDisconnect');
         $('#DCbtn').html("<img src='static/img/newchat.png' id='dc' draggable='false' height=70;>").fadeIn(100);
-        $('input').prop("disabled", true)
-      };
+        $('input').prop("disabled", true);
+      }
 
       function poll() {
         $('input').prop("disabled", true);
@@ -57,15 +57,15 @@ $(document).ready(function () {
             setTimeout(function () {
               document.title = "Gammada";
             }, 5000);
-          };
+          }
         });
-      };
-      userRef = new Firebase('https://yourfirebase.firebaseio.com/users/' + authData.uid);
-      amOnline = new Firebase('https://yourfirebase.firebaseio.com/.info/connected');
-      mesgRef = new Firebase('https://yourfirebase.firebaseio.com/mesg/');
+      }
+      userRef = new Firebase('https://gammada.firebaseio.com/users/' + authData.uid);
+      amOnline = new Firebase('https://gammada.firebaseio.com/.info/connected');
+      mesgRef = new Firebase('https://gammada.firebaseio.com/mesg/');
       if (!error) {
         console.log("Authenticated successfully with payload:", authData);
-      };
+      }
       var initialChat = "<div id='chatwindow'><div id='messagelist'><li id='looking'>Looking for a partner...</li></div><div id='inputbar'><div id='DCbtn'><img src='static/img/dc.png' id='dc' draggable='false' height=70;></div><input disabled='true'></div></div>";
       $("#landing").fadeOut(100);
       $(initialChat).hide().appendTo("body").fadeIn(150);
@@ -78,7 +78,7 @@ $(document).ready(function () {
             uid: yourUid,
             status: 'dc',
           });
-        };
+        }
       });
       userRef.on('value', function (snap) {
         yourStatus = snap.val().status;
@@ -104,14 +104,14 @@ $(document).ready(function () {
             backgroundColor: '#6E0A1E'
           });
           $(this).addClass('nextDisconnect');
-        };
+        }
       });
       $('input').keypress(function (e) {
         if (e.keyCode === 13) {
           $('nextDisconnect').removeClass("nextDisconnect");
           $('nextDisconnect').html("<img src='static/img/dc.png' id='dc' draggable='false' height=70;>").fadeIn(100);
           $input = $('input').val().replace(/\s+/g, ' ');
-          if ($input != '' && $input != ' ') {
+          if ($input !== '' && $input !== ' ') {
             var message = $('input').val();
             mesgRef.push({
               uid: yourUid,
@@ -119,8 +119,8 @@ $(document).ready(function () {
               pid: partner.uid
             });
             $('input').val('');
-          };
-        };
+          }
+        }
       });
       mesgRef.on('child_added', function (snapshot) {
         var data = snapshot.val();
@@ -131,7 +131,7 @@ $(document).ready(function () {
           var messageElement = $("<li class='you'>");
           var nameElement = $("<strong class='you'>You: </strong>");
           messageElement.text(message).prepend(nameElement);
-          $('#messagelist').append(messageElement)
+          $('#messagelist').append(messageElement);
           $('#messagelist')[0].scrollTop = $('#messagelist')[0].scrollHeight;
         } else if (yourUid === pid) {
           document.title = "*** NEW MESSAGE ***";
@@ -139,11 +139,11 @@ $(document).ready(function () {
             document.title = "Gammada";
           }, 5000);
           var messageElement = $("<li class='stranger'>");
-          var nameElement = $("<strong class='stranger'>Stranger: </strong>")
+          var nameElement = $("<strong class='stranger'>Stranger: </strong>");
           messageElement.text(message).prepend(nameElement);
-          $('#messagelist').append(messageElement)
+          $('#messagelist').append(messageElement);
           $('#messagelist')[0].scrollTop = $('#messagelist')[0].scrollHeight;
-        };
+        }
       });
       userRef.parent().orderByChild("status").on("child_changed", function (snapshot) {
         if (snapshot.val().uid === yourPartner && snapshot.val().status !== "chatting") {
@@ -152,8 +152,8 @@ $(document).ready(function () {
             var messageElement = "<li id='udc'>Stranger has disconnected.</li>";
             $('#messagelist').append(messageElement);
             $('#messagelist')[0].scrollTop = $('#messagelist')[0].scrollHeight;
-          };
-        };
+          }
+        }
       });
     }, {
       remember: "sessionOnly"
