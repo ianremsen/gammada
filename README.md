@@ -1,3 +1,6 @@
+This project is currently indefinitely shelved. It's unlikely there'll be more work by me in the future.
+--------------------------------------------------------------------------------------------------------
+
 gammada v0.4
 =======
 *A randomizing chat client*
